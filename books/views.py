@@ -8,7 +8,7 @@ def login(request):
         return redirect("list_books")
     return render(request, "books/login.html", {'users': users})
 
-@login_required
+
 def list_albums(request):
     books = Book.objects.all()
     return render(request, "books/list_books.html", {"books": books})
