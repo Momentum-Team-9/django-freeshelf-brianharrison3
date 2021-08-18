@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>All Books</h1>
+
+<p><a href="{% url '' %}">Add New Book</a></p>
+
+
+  <div class="w-33 pa3">
+    <h2>{{ Book.name }}</h2>

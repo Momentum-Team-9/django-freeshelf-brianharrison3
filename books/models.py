@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db.models.fields import SlugField
 
 
 class User(AbstractUser):
@@ -11,10 +12,13 @@ class User(AbstractUser):
 
 class Book(models.Model):
     title = models.CharField(max_length=255)
-    author = models.ForeignKey(
-        "Author", on_delete=models.CASCADE, related_name="books"
+    author = models.ManyToManyField(
+        "Author", related_name="authors"
     )
+    description = models.CharField(max_length=255, null=True)
     release_date = models.DateField()
+
+
 
     def __repr__(self):
         return f"<Book title={self.title}>"
@@ -24,8 +28,10 @@ class Book(models.Model):
 
 class Author (models.Model):
     name = models.CharField(max_length=255)
+    # books = models.ManyToManyField(Book, related_name='book')
 
     def __repr__(self):
         return f"<Author name={self.name}>"
     def __str__(self):
         return self.name
+
